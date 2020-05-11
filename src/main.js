@@ -9,6 +9,8 @@ Vue.use(VueRouter)
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 Vue.http.options.root = 'http://vue.studyit.io'
+Vue.http.options.emulateJSON=true
+
 
 import {Header, Swipe, SwipeItem,Button} from 'mint-ui'
 Vue.component(Header.name,Header)
