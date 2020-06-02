@@ -3,27 +3,40 @@
         <div class="mui-card">
 			<div class="mui-card-content">
 				<div class="mui-card-content-inner">
-					<swiper :bannerList="lunbotu"></swiper>
+					<swiper :bannerList="lunbotu" :isfull="false"></swiper>
 				</div>
 			</div>
 		</div>
         <div class="mui-card">
-			<div class="mui-card-header">页眉</div>
+			<div class="mui-card-header">小米Note 16G</div>
 			<div class="mui-card-content">
 				<div class="mui-card-content-inner">
-					包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+                    <p class="price">
+                        市场价：<del>￥3699</del>&nbsp;&nbsp;&nbsp;销售价：<span>￥2199</span>
+                    </p>
+                    <p>购买数量:<numbox></numbox></p>
+                    <span>
+                        <mt-button type="primary" size="small">立即购买</mt-button>
+                        <mt-button type="danger" size="small">加入购物车</mt-button>
+                    </span>
 				</div>
 			</div>
 
 		</div>
         <div class="mui-card">
-			<div class="mui-card-header">页眉</div>
+			<div class="mui-card-header">商品参数</div>
 			<div class="mui-card-content">
 				<div class="mui-card-content-inner">
-					包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+                    <p>商品货号：</p>
+                    <p>库存情况：</p>
+                    <p>上架时间：</p>
+
 				</div>
 			</div>
-			<div class="mui-card-footer">页脚</div>
+			<div class="mui-card-footer">
+                <mt-button type="primary" size="large" @click="goDesc(id)">图文介绍</mt-button>
+                <mt-button type="danger" size="large" @click="goComment(id)">商品评论</mt-button>
+            </div>
 		</div>
         
     </div>
@@ -31,11 +44,13 @@
 
 <script>
 import swiper from '../subcomponents/swiper.vue'
+import numbox from '../subcomponents/goodsinfo_numbox.vue'
 
 export default {
     
     data(){
         return{
+            id:this.$route.params.id,
             lunbotu:[{
                 img_url:"https://img14.360buyimg.com/n0/jfs/t1/87471/28/14430/172200/5e662061Ea03a4d51/bf964109683a907b.jpg"
             },
@@ -54,14 +69,37 @@ export default {
 
     },
     methods: {
+        goDesc(id){
+            this.$router.push({path:'/home/goodsDesc/'+id})
+        },
+        goComment(id){
+            this.$router.push({name:'goodscomment',params:{id}})
+        }
         
     },
     components:{
-        swiper
+        swiper,
+        numbox
     }
 }
 </script>
 
 <style lang="scss" scoped>
+.goodsinfo{
+    .price{
+        color: #000;
+        span{
+            color: red;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+    .mui-card-footer{
+        display: block;
+        button{
+            margin: 15px 0;
+        }
+    }
+}
 
 </style>

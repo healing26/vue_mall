@@ -1,7 +1,7 @@
 <template>
     <div>
         <mt-swipe :auto="4000">
-            <mt-swipe-item v-for="item in bannerList" :key="item"> <img :src="item.img_url" ></mt-swipe-item>
+            <mt-swipe-item v-for="item in bannerList" :key="item"> <img :src="item.img_url" :class={full:isfull}></mt-swipe-item>
         </mt-swipe>
     </div>
 </template>
@@ -13,7 +13,7 @@ export default {
 
         }
     },
-    props:['bannerList']
+    props:['bannerList','isfull']
 }
 </script>
 
@@ -21,8 +21,13 @@ export default {
     .mint-swipe{
         height: 200px;
     }
-    .mint-swipe-item img{
+    .mint-swipe-item{
+        text-align: center;
+        img{
+            height: 100%;
+        }
+    }
+    .full{
         width: 100%;
-        height: 100%;
     }
 </style>
