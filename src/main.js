@@ -12,11 +12,21 @@ Vue.http.options.root = 'http://vue.studyit.io'
 Vue.http.options.emulateJSON=true
 
 
-import {Header, Swipe, SwipeItem,Button} from 'mint-ui'
-Vue.component(Header.name,Header)
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
-Vue.component(Button.name, Button);
+// import {Header, Swipe, SwipeItem,Button,Lazyload} from 'mint-ui'
+// Vue.component(Header.name,Header)
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+// Vue.component(Button.name, Button);
+// Vue.use(Lazyload);
+
+
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+Vue.use(MintUI)
+
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview)
+
 
 import moment from 'moment'
 

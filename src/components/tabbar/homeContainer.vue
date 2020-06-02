@@ -1,8 +1,6 @@
 <template>
     <div>
-        <mt-swipe :auto="4000">
-            <mt-swipe-item v-for="item in bannerList" :key="item"> <img :src="item" ></mt-swipe-item>
-        </mt-swipe>
+        <swiper :bannerList="bannerList"></swiper>
         <ul class="mui-table-view mui-grid-view mui-grid-9">
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <router-link to="/home/newslist">
@@ -14,9 +12,11 @@
                     <img src="../../img/menu4.png" alt="">
                     <div class="mui-media-body">图片分享</div>
                 </router-link></li>
-            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                <router-link to="/home/goodslist">
                     <img src="../../img/menu3.png" alt="">
-                    <div class="mui-media-body">商品购买</div></a></li>
+                    <div class="mui-media-body">商品购买</div>
+                </router-link></li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
                     <img src="../../img/menu2.png" alt="">
                     <div class="mui-media-body">留言反馈</div></a></li>
@@ -33,15 +33,20 @@
 
 <script>
 import {Toast} from 'mint-ui'
+import swiper from '../subcomponents/swiper.vue'
 
 export default{
     data(){
         return{
-            bannerList:[
-                'http://file06.16sucai.com/2016/0222/17714c3b51079911760e5ef7fdb553f6.jpg',
-                'http://file07.16sucai.com/dysucai/content/20200415/fisdfbjaf2w.jpg',
-                'http://file06.16sucai.com/2016/0315/1df566087c24a94cd9534bc9bc1871ff.jpg',
-                'http://file07.16sucai.com/dysucai/content/20200415/a54fdizh0xy.jpg']
+            bannerList:[{
+                img_url:'http://file06.16sucai.com/2016/0222/17714c3b51079911760e5ef7fdb553f6.jpg',
+            },{
+                img_url:'http://file07.16sucai.com/dysucai/content/20200415/fisdfbjaf2w.jpg',
+            },{
+                img_url:'http://file06.16sucai.com/2016/0315/1df566087c24a94cd9534bc9bc1871ff.jpg',
+            },{
+                img_url:'http://file07.16sucai.com/dysucai/content/20200415/a54fdizh0xy.jpg'
+            }]
         }
     },
     created(){
@@ -58,19 +63,16 @@ export default{
                 }
             })
         }
+    },
+    components:{
+        swiper
     }
 }
 
 </script>
 
 <style scoped>
-    .mint-swipe{
-        height: 200px;
-    }
-    .mint-swipe-item img{
-        width: 100%;
-        height: 100%;
-    }
+
     .mui-grid-view.mui-grid-9{
         background-color: #fff;
 
