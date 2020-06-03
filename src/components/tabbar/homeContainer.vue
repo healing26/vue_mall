@@ -35,7 +35,7 @@
 import {Toast} from 'mint-ui'
 import swiper from '../subcomponents/swiper.vue'
 
-export default{
+export default {
     data(){
         return{
             bannerList:[{
@@ -50,7 +50,6 @@ export default{
         }
     },
     created(){
-        this.getBanner()
     },
     methods:{
         getBanner(){

@@ -1,5 +1,11 @@
 <template>
     <div class="goodsinfo">
+        <transition
+            @before-enter="beforenter"
+            @enter="enter"
+            @after-enter="afterenter">
+            <div class="ball" v-show="ballFlag" ref="ball"></div>
+        </transition>
         <div class="mui-card">
 			<div class="mui-card-content">
 				<div class="mui-card-content-inner">
@@ -14,10 +20,10 @@
                     <p class="price">
                         市场价：<del>￥3699</del>&nbsp;&nbsp;&nbsp;销售价：<span>￥2199</span>
                     </p>
-                    <p>购买数量:<numbox></numbox></p>
+                    <p>购买数量:<numbox @getCount="getSelectCount" :max="maxNum"></numbox></p>
                     <span>
                         <mt-button type="primary" size="small">立即购买</mt-button>
-                        <mt-button type="danger" size="small">加入购物车</mt-button>
+                        <mt-button type="danger" size="small" @click="goCart">加入购物车</mt-button>
                     </span>
 				</div>
 			</div>
@@ -62,7 +68,10 @@ export default {
             },
             {
                 img_url:"https://img14.360buyimg.com/n0/jfs/t1/102649/14/14206/142144/5e622d89E073520fb/5df216a1c008604d.jpg"
-            }]
+            }],
+            ballFlag:false,
+            selectCount:'',
+            maxNum:10
         }
     },
     created(){
@@ -74,8 +83,29 @@ export default {
         },
         goComment(id){
             this.$router.push({name:'goodscomment',params:{id}})
+        },
+        goCart(){
+            this.ballFlag = !this.ballFlag
+        },
+        beforenter(el){
+            el.style.transform = "translate(0,0)"
+        },
+        enter(el,done){
+            el.offsetWidth
+            const ballposition = this.$refs.ball.getBoundingClientRect()
+            const badgeposition = document.getElementById("badge").getBoundingClientRect()
+            const xDist = badgeposition.left - ballposition.left
+            const yDist = badgeposition.top - ballposition.top
+            el.style.transform= `translate(${xDist}px,${yDist}px)`
+            el.style.transition= "all 1s ease"
+            done()
+        },
+        afterenter(el){
+            this.ballFlag = !this.ballFlag
+        },
+        getSelectCount(count){
+            this.selectCount = count
         }
-        
     },
     components:{
         swiper,
@@ -86,6 +116,16 @@ export default {
 
 <style lang="scss" scoped>
 .goodsinfo{
+    .ball{
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        position: absolute;
+        z-index: 99;
+        background-color: red;
+        top: 390px;
+        left: 137px;
+    }
     .price{
         color: #000;
         span{

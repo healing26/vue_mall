@@ -1,7 +1,7 @@
 <template>
-    <div class="mui-numbox" data-numbox-min='1' data-numbox-max='9'>
+    <div class="mui-numbox" data-numbox-min='1' :data-numbox-max='max'>
 		<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-		<input id="test" class="mui-input-numbox" type="number" value="1" />
+		<input id="test" class="mui-input-numbox" type="number" value="1" @change="countChanged" ref="numbox"/>
 		<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
 	</div>
 </template>
@@ -11,7 +11,20 @@ import mui from '../../lib/mui/js/mui.js'
 export default {
     mounted(){
         mui(".mui-numbox").numbox();
-    }
+        console.log(this.max)
+    },
+    methods: {
+        countChanged(){
+            this.$emit("getCount",parseInt(this.$refs.numbox.value))
+        }
+    },
+    props:["max"],
+    watch: {
+        'max':function(newval,oldval){ 
+            console.log(newval)
+            mui(".mui-numbox").numbox().setOption("max",newval)
+        }
+    },
 }
 </script>
 

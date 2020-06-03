@@ -1,12 +1,15 @@
 <template>
     <div>
         <mt-swipe :auto="4000">
-            <mt-swipe-item v-for="item in bannerList" :key="item"> <img :src="item.img_url" :class={full:isfull}></mt-swipe-item>
+            <mt-swipe-item v-for="(item,i) in bannerList" :key="i"> <img :src="item.img_url" :class={full:isfull}></mt-swipe-item>
         </mt-swipe>
     </div>
 </template>
 
 <script>
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+
 export default {
     data(){
         return{
