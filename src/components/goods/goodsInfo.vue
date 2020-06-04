@@ -70,7 +70,7 @@ export default {
                 img_url:"https://img14.360buyimg.com/n0/jfs/t1/102649/14/14206/142144/5e622d89E073520fb/5df216a1c008604d.jpg"
             }],
             ballFlag:false,
-            selectCount:'',
+            selectCount:1,
             maxNum:10
         }
     },
@@ -86,6 +86,8 @@ export default {
         },
         goCart(){
             this.ballFlag = !this.ballFlag
+            var goodsinfo = {id:this.id,count:this.selectCount,price:699,selected:true}
+            this.$store.commit('addToCar',goodsinfo)
         },
         beforenter(el){
             el.style.transform = "translate(0,0)"

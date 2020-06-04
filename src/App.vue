@@ -1,6 +1,11 @@
 <template>
   <div class="app-container">
-    <mt-header fixed title="VUE商城项目" ></mt-header>
+    <mt-header fixed title="VUE商城项目" >
+		<span @click="goBack" slot="left" v-show="flag">
+		    <mt-button icon="back">返回</mt-button>
+		</span>
+		
+	</mt-header>
 	<transition mode="out-in">
     	<router-view></router-view>
 	</transition>
@@ -14,7 +19,7 @@
 				<span class="mui-tab-label">会员</span>
 			</router-link>
 			<router-link class="mui-tab-item-new" to="/cart">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge" id="badge">6</span></span>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge" id="badge">{{ $store.getters.getAllCount }}</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
 			<router-link class="mui-tab-item-new" to="/search">
@@ -26,6 +31,31 @@
 </template>
 
 <script>
+export default {
+	data(){
+		return{
+			flag:false
+		}
+	},
+	created(){
+		this.flag = this.$route.path === "/home"?false : true
+	},
+	methods: {
+		goBack(){
+			this.$router.go(-1)
+		}
+	},
+	watch:{
+		"$route.path":function(newval){
+			if(newval === "/home"){
+				this.flag = false
+			}else{
+				this.flag = true
+			}
+			console.log(this.$route.path)
+		}
+	}
+}
 </script>
 
 
